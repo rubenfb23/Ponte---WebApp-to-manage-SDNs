@@ -3,24 +3,32 @@ html,body {
     font-family: 'Roboto', sans-serif;
     font-size: 20px;
     font-weight: 400;
-    line-height: 1.6;
     color: #333;
     height: 100%;
-    min-height: 100%;
+    width: 100%;
+    margin: 0;
 }
 
+.global {
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
 
+#map {
+    height: 100%;
+    width: 100%;
+}
 
 h1 {
     font-size: 36px;
     font-weight: bolder;
-    line-height: 1.2;
     margin-top: 0;
     margin-bottom: 10px;
 }
 
 .redes {
-    max-width: 98%;
+    max-width: 97%;
     display: flow;
     vertical-align: top;
     background-color: #ede3aa;
@@ -56,13 +64,12 @@ h1 {
 .navbar {
     background-color: #bfbfbf;
     color: black;
-    border-radius: 10px;
-    border: 1px solid black;
+    border: 1px solid grey;
     display: flow;
     width: 30%;
     text-align: center;
-    height: 98%;
-    min-height: 98%;
+    height: 100%;
+    min-height: 100%;
 }
 
 .header {
