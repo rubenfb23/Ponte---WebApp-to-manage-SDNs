@@ -12,18 +12,18 @@
         </div>
         <div class='redes'>
         {% for r in redes %}
-            {% if r.estado == '1' %}
-            <div class='red'>
-                <p>#{{r.id_red}} {{ r.nombre }}</p>
-            </br>
-                <span class='verde'/>
-            </div>
-            {% else %}
-            <div class='red'>
-                <p>#{{r.id_red}} {{ r.nombre }}</p>
-                <span class='rojo'/>
-            </div>
-            {% endif %}
+                {% if r.estado == 1 %}
+                <div class='red'>
+                    <p>{{ r.nombre }}</p>
+                    <span class='verde'/>
+                    <br/>
+                </div>
+                {% else %}
+                <div class='red'>
+                    <p>{{ r.nombre }}</p>
+                    <span class='rojo'/>
+                </div>
+                {% endif %}
         {% endfor %}
         </div>
 </body>

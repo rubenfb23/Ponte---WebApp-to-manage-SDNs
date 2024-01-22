@@ -2,18 +2,18 @@ from django.db import models
 
 
 class Servicio(models.Model):
-    id_servicio = models.CharField(max_length=20, primary_key=True)
+    id_servicio = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=20)
     descripcion = models.CharField(max_length=20)
     tipo = models.CharField(max_length=20)
     estado = models.CharField(max_length=20)
 
     def __str__(self):
-        return "#" + self.id_servicio + " " + self.nombre
+        return self.nombre
 
 
 class Dispositivo(models.Model):
-    id_dispositivo = models.CharField(max_length=20, primary_key=True)
+    id_dispositivo = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=20)
     localizacion = models.CharField(max_length=20)
     descripcion = models.CharField(max_length=20)
@@ -23,11 +23,11 @@ class Dispositivo(models.Model):
     servicios = models.ManyToManyField(Servicio)
     
     def __str__(self):
-        return "#" + self.id_dispositivo + " " + self.nombre + " " + self.localizacion
+        return self.nombre
 
 
 class Red(models.Model):
-    id_red = models.CharField(max_length=20, primary_key=True)
+    id_red = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=20)
     descripcion = models.CharField(max_length=20)
     tipo = models.CharField(max_length=20)
@@ -38,11 +38,11 @@ class Red(models.Model):
     dispositivos = models.ManyToManyField(Dispositivo)
 
     def __str__(self):
-        return "#" + self.id_red + " " + self.nombre
+        return self.nombre
 
 
 class Grupo(models.Model):
-    id_grupo = models.CharField(max_length=20, primary_key=True)
+    id_grupo = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=20)
     descripcion = models.CharField(max_length=20)
     tipo = models.CharField(max_length=20)
@@ -50,4 +50,4 @@ class Grupo(models.Model):
     redes = models.ManyToManyField(Red)
 
     def __str__(self):
-        return "#" + self.id_grupo + " " + self.nombre
+        return self.nombre
