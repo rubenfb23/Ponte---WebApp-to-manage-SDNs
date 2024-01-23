@@ -17,9 +17,11 @@ def red(request, id_red):
 
 
 def crear_red(request, latitud, longitud):
+    dispositivos = Dispositivo.objects.all()
     return render(request, 'crear_red.html', {
         'latitud': latitud,
         'longitud': longitud,
+        'dispositivos': dispositivos,
     })
 
 

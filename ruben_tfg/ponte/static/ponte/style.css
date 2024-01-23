@@ -9,6 +9,14 @@ html,body {
     margin: 0;
 }
 
+.title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 32px;
+    font-weight: bolder;
+    text-align: center;
+    color: #333;
+}
+
 .global {
     height: 100%;
     width: 100%;
@@ -28,6 +36,21 @@ h1 {
     margin-bottom: 20px;
 }
 
+.submit {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: solid;
+    display: inline-block;
+    font-size: 16px;
+    width: 25%;
+    align-items: center;
+    margin: auto;
+    margin-top: 10px;
+}
+
 .buttons{
     display: grid;
     width: 90%;
@@ -35,6 +58,31 @@ h1 {
     justify-items: left ;
     margin: auto;
     margin-top: 5%;
+}
+
+label, input {
+    display: block;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+
+}
+
+label {
+    font-weight: 600;
+    margin-top: 20px;
+}
+
+form {
+    display: grid;
+    width: 50%;
+    margin: auto;
 }
 
 .button{

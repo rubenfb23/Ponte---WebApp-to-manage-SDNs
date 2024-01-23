@@ -1,10 +1,47 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Create Network</title>
+    <title>Crear Red</title>
+    <link rel="stylesheet" href="{% static 'ponte/style.css' %}">
 </head>
 <body>
-    <h1>Create Network</h1>
-    <p>{{ latitud }} {{ longitud }}</p>
+    <h1 class='title'>Crear Red</h1>
+    <div>
+        <form>
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required title="Este campo es obligatorio">
+
+            <label for="descripcion">Descripción:</label>
+            <input type="text" id="descripcion" name="descripcion" required title="Este campo es obligatorio">
+
+            <label for="tipo">Tipo:</label>
+            <input type="text" id="tipo" name="tipo" required title="Este campo es obligatorio">
+
+            <label for="ip">IP:</label>
+            <input type="text" id="ip" name="ip" required title="Este campo es obligatorio">
+
+            <label for="mascara">Máscara:</label>
+            <input type="text" id="mascara" name="mascara" required title="Este campo es obligatorio">
+
+            <label for="puerta_enlace">Puerta de enlace:</label>
+            <input type="text" id="puerta_enlace" name="puerta_enlace" required title="Este campo es obligatorio">
+
+            <label for="latitud">Latitud:</label>
+            <input type="text" id="latitud" name="latitud" value={{latitud}} required title="Este campo es obligatorio">
+
+            <label for="longitud">Longitud:</label>
+            <input type="text" id="longitud" name="longitud" value={{longitud}} required title="Este campo es obligatorio">
+
+            <label for="dispositivos">Dispositivos:</label>
+            <select id="dispositivos" name="dispositivos" multiple>
+                {% for dispositivo in dispositivos %}
+                <option value="{{ dispositivo.id }}">{{ dispositivo.nombre }}</option>
+                {% endfor %}
+            </select>
+
+            <input class="submit" type="submit" value="Create">
+        </form>
+    </div>
 </body>
 </html>
