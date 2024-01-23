@@ -1,5 +1,11 @@
 from django.db import models
 
+TIPO_CHOICES = [
+    ('Educativa', 'Educativa'),
+    ('Personal', 'Personal'),
+    ('Empresarial', 'Empresarial'),
+]
+
 
 class Servicio(models.Model):
     id_servicio = models.AutoField(primary_key=True)
@@ -21,7 +27,7 @@ class Dispositivo(models.Model):
     estado = models.CharField(max_length=20)
     sistema_operativo = models.CharField(max_length=20)
     servicios = models.ManyToManyField(Servicio)
-    
+
     def __str__(self):
         return self.nombre
 
@@ -30,7 +36,7 @@ class Red(models.Model):
     id_red = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=20)
     descripcion = models.CharField(max_length=20)
-    tipo = models.CharField(max_length=20)
+    tipo = models.CharField(max_length=20, choices=TIPO_CHOICES)
     estado = models.BooleanField()
     ip = models.CharField(max_length=20)
     mascara = models.CharField(max_length=20)

@@ -29,6 +29,22 @@ html,body {
     flex-grow: 1;
 }
 
+select {
+    font-size: 16px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin: 1px;
+    border-radius: 10px;
+}
+
+option {
+    font-size: 16px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin: 1px;
+    border-radius: 5px;
+}
+
 h1 {
     font-size: 28px;
     font-weight: 600;

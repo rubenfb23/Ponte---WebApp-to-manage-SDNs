@@ -16,7 +16,11 @@
             <input type="text" id="descripcion" name="descripcion" required title="Este campo es obligatorio">
 
             <label for="tipo">Tipo:</label>
-            <input type="text" id="tipo" name="tipo" required title="Este campo es obligatorio">
+            <select id="tipo" name="tipo" required title="Este campo es obligatorio">
+                <option value="educativa">Educativa</option>
+                <option value="personal">Personal</option>
+                <option value="empresarial">Empresarial</option>
+            </select>
 
             <label for="ip">IP:</label>
             <input type="text" id="ip" name="ip" required title="Este campo es obligatorio">
@@ -28,10 +32,10 @@
             <input type="text" id="puerta_enlace" name="puerta_enlace" required title="Este campo es obligatorio">
 
             <label for="latitud">Latitud:</label>
-            <input type="text" id="latitud" name="latitud" value={{latitud}} required title="Este campo es obligatorio">
+            <input type="text" id="latitud" name="latitud" value={{latitud}} required disabled>
 
             <label for="longitud">Longitud:</label>
-            <input type="text" id="longitud" name="longitud" value={{longitud}} required title="Este campo es obligatorio">
+            <input type="text" id="longitud" name="longitud" value={{longitud}} required disabled>
 
             <label for="dispositivos">Dispositivos:</label>
             <select id="dispositivos" name="dispositivos" multiple>
