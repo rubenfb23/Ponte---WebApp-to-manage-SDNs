@@ -23,7 +23,12 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('red/<int:id_red>', views.red, name='red'),
     path('admin/', admin.site.urls),
+    path('', views.index, name='index'),
+    path('ponte/red/<int:id_red>', views.red, name='red'),
+    path('ponte/red/crear_red/<str:latitud>,<str:longitud>',
+         views.crear_red, name='crear_red'),
+    path('ponte/grupo/<int:id_grupo>', views.grupo, name='grupo'),
+    path('ponte/grupo/crear_grupo', views.crear_grupo, name='crear_grupo'),
+    path('ponte/configuracion', views.configuracion, name='configuracion'),
 ]

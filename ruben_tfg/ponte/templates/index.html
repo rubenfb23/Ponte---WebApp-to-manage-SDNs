@@ -20,13 +20,13 @@
         <div class='redes'>
         {% for r in redes %}
                 {% if r.estado == 1 %}
-                <div class='red'>
+                <div class='red' onclick="window.location.href='ponte/red/{{ r.id_red }}';">
                     <p>{{ r.nombre }}</p>
                     <span class='verde'/>
                     <br/>
                 </div>
                 {% else %}
-                <div class='red'>
+                <div class='red' onclick="window.location.href='ponte/red/{{ r.id_red }}';">
                     <p>{{ r.nombre }}</p>
                     <span class='rojo'/>
                 </div>
@@ -34,8 +34,9 @@
         {% endfor %}
         </div>
         <div class='buttons'>
-            <a href='/ponte/crear_red' class='button'><button>Crear Red</button></a>
-            <a href='/ponte/crear_punto' class='button'><button>Crear Punto</button></a>
+            <a href='/ponte/grupo/crear_grupo' class='button'><button>Crear Grupo</button></a>
+            <a href='/ponte/red/crear_red' class='button'><button>Crear Red</button></a>
+            <a href='/ponte/configuracion' class='button'><button>Configuración</button></a>
         </div>
     </div>
     <div id="map"></div>
@@ -55,8 +56,7 @@
         const x = e.latlng.lat;
         const y = e.latlng.lng;
         const marker = L.marker([x, y]).addTo(map);
-        marker.bindPopup("<b>Coordenadas</b><br/>" + x + ", " + y + "<br/><button class='buttonpop' onclick='console.log(\"Crear red button clicked\")'>Crear red aquí</button>").openPopup();
-
+        marker.bindPopup("<b>Coordenadas</b><br/>" + x + ", " + y + "<br/><a href='/ponte/red/crear_red/" + x + "," + y + "' class='buttonpop'><button>Crear red aquí</button></a>").openPopup();
         const container = document.getElementsByClassName('leaflet-control-container')[0];
         const customControl = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
         container.appendChild(customControl);

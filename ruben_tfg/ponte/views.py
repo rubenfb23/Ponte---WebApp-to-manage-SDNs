@@ -1,15 +1,35 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, JsonResponse
-from .models import Red
+from django.http import HttpResponse
+from .models import Red, Grupo, Dispositivo, Servicio
 
 
 def index(request):
     redes = Red.objects.all()
+
     return render(request, 'index.html', {
         'redes': redes,
     })
 
 
 def red(request, id_red):
-    red = list(Red.objects.get(id_red=id_red))
-    return JsonResponse(red, safe=False)
+    red = get_object_or_404(Red, pk=id_red)
+    return HttpResponse("You're looking at red %s." % red.nombre)
+
+
+def crear_red(request, latitud, longitud):
+    return render(request, 'crear_red.html', {
+        'latitud': latitud,
+        'longitud': longitud,
+    })
+
+
+def grupo(request, id_grupo):
+    return HttpResponse("You're looking at grupo %s." % id_grupo)
+
+
+def crear_grupo(request):
+    return render(request, 'crear_grupo.html')
+
+
+def configuracion(request):
+    return HttpResponse("You're looking at configuracion")
