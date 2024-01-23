@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Red</title>
+    <link rel="stylesheet" href="{% static 'ponte/style.css' %}">
+    <script>
+        function showBox(dispositivo) {
+            var box = document.getElementById("box");
+            box.innerHTML = "<h1>" + dispositivo + "</h1>";
+        }
+    </script>
+</head>
+<body>
+<div class='global'>
+    <div class='navbar'>
+        <div class='header'>
+        <h1>Informacion sobre la red</h1>
+        </div>
+        <div class='contenido'>
+        <p>Nombre: {{red.nombre}}</p>
+        <p>Descripción: {{red.descripcion}}</p>
+        <p>Tipo: {{red.tipo}}</p>
+        <p>Estado: {% if red.estado %}Online{% else %}Offline{% endif %}</p>
+        <p>IP: {{red.ip}}</p>
+        <p>Máscara: {{red.mascara}}</p>
+        <p>Puerta de enlace: {{red.puerta_enlace}}</p>
+        <p>Latitud: {{red.latitud}}</p>
+        <p>Longitud: {{red.longitud}}</p>
+        <p>Dispositivos:</p>
+        <ul>
+            {% for dispositivo in red.dispositivos.all %}
+                <li><a href="#" onclick="showBox('{{ dispositivo }}')">{{ dispositivo }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class='buttons'>
+        <a  class='button'><button>Crear Grupo</button></a>
+        <a href='/ponte/red/crear_red/0,0' class='button'><button>Crear Red</button></a>
+        <a href='/ponte/configuracion' class='button'><button>Configuración</button></a>
+    </div>
+    </div>
+    <div class='topologia'>
+        <div id="box"></div>
+    </div>
+    </div>
+</div>
+</body>
+</html>

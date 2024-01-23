@@ -21,20 +21,20 @@
         {% for r in redes %}
                 {% if r.estado == 1 %}
                 <div class='red' onclick="window.location.href='ponte/red/{{ r.id_red }}';">
-                    <p>{{ r.nombre }}</p>
+                    <a class='redbutton'> {{ r.nombre }}</a>
                     <span class='verde'/>
                     <br/>
                 </div>
                 {% else %}
                 <div class='red' onclick="window.location.href='ponte/red/{{ r.id_red }}';">
-                    <p>{{ r.nombre }}</p>
+                    <a class='redbutton'>{{ r.nombre }}</a>
                     <span class='rojo'/>
                 </div>
                 {% endif %}
         {% endfor %}
         </div>
         <div class='buttons'>
-            <a href='/ponte/grupo/crear_grupo' class='button'><button>Crear Grupo</button></a>
+            <a class='button'><button>Crear Grupo</button></a>
             <a href='/ponte/red/crear_red/0,0' class='button'><button>Crear Red</button></a>
             <a href='/ponte/configuracion' class='button'><button>Configuración</button></a>
         </div>
@@ -46,7 +46,7 @@
     L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
         maxZoom: 18
     }).addTo(map);
-
+    
     map.on('click', function(e) {
         map.eachLayer(function (layer) {
             if (layer instanceof L.Marker) {
@@ -62,6 +62,11 @@
         container.appendChild(customControl);
     });
     </script>
+    {%for r in redes %}
+    <script>
+        L.marker([{{ r.latitud }}, {{ r.longitud }}]).addTo(map);
+    </script>
+    {% endfor %}
     </div>
     </div>
 </body>

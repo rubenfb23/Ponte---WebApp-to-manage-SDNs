@@ -5,7 +5,6 @@ from .models import Red, Grupo, Dispositivo, Servicio
 
 def index(request):
     redes = Red.objects.all()
-
     return render(request, 'index.html', {
         'redes': redes,
     })
@@ -13,7 +12,9 @@ def index(request):
 
 def red(request, id_red):
     red = get_object_or_404(Red, pk=id_red)
-    return HttpResponse("You're looking at red %s." % red.nombre)
+    return render(request, 'red.html', {
+        'red': red,
+    })
 
 
 def crear_red(request, latitud, longitud):

@@ -23,10 +23,18 @@ html,body {
     display: flex;
 }
 
-#map {
+#map{
     height: 100%;
     width: 100%;
     flex-grow: 1;
+}
+
+.topologia {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
 }
 
 select {
@@ -50,6 +58,12 @@ h1 {
     font-weight: 600;
     margin-top: 20px;
     margin-bottom: 20px;
+}
+
+p,li{ 
+    font-size: 16px;
+    text-align: left;
+    margin-left: 10px;
 }
 
 .submit {
@@ -111,14 +125,30 @@ form {
     font-size: 16px;
 }
 
-.redes {
-    background-color: #ede3aa;
+.redbutton {
+    border: none;
+    color: black;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: solid;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.redes{
     margin: 10px 0;
     padding: 10px;
     border-radius: 10px;
     list-style: none;
     width: 90%;
     margin: auto;
+}
+
+.contenido{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
 }
 
 .verde {
@@ -139,25 +169,29 @@ form {
     margin-left: 5px;
 }
 
-.red {  
+.red {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);  
     display: flex;
-    margin-left: 10px;
     max-height: 5%;
     width: 90%;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin: 5px;
 }
 
 .navbar {
     background-color: #d5d5d5;
     color: black;
-    justify-content: space-between;
     border: 1px solid grey;
-    display: flow;
+    display: grid;
     width: 20%;
     text-align: center;
     height: 100%;
     min-height: 100%;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
     flex-shrink: 0;
+    align-content: space-between;
+    align-items: stretch;
 }
 
 .header {
