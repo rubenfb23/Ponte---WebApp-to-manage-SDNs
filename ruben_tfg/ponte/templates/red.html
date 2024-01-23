@@ -7,7 +7,7 @@
     <script>
         function showBox(dispositivo) {
             var box = document.getElementById("box");
-            box.innerHTML = "<h1>" + dispositivo + "</h1>";
+            box.innerHTML = "<img src='/static/ponte/ordenador-personal.png' alt='Dispositivo'/>";
         }
     </script>
 </head>
@@ -15,9 +15,10 @@
 <div class='global'>
     <div class='navbar'>
         <div class='header'>
-        <h1>Informacion sobre la red</h1>
+            <a href='/'><img src="{% static 'ponte/img/casa.png' %}" class='logo'/></a>
         </div>
         <div class='contenido'>
+        <h1>Red</h1>
         <p>Nombre: {{red.nombre}}</p>
         <p>Descripción: {{red.descripcion}}</p>
         <p>Tipo: {{red.tipo}}</p>

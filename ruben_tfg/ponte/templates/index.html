@@ -15,9 +15,10 @@
     <div class='global'>
     <div class='navbar'>
         <div class='header'>
-        <h1>Redes</h1>
+            <img src="{% static 'ponte/img/casa.png' %}" class='logo'/>
         </div>
         <div class='redes'>
+        <h1>Redes</h1>
         {% for r in redes %}
                 {% if r.estado == 1 %}
                 <div class='red' onclick="window.location.href='ponte/red/{{ r.id_red }}';">
@@ -48,11 +49,6 @@
     }).addTo(map);
     
     map.on('click', function(e) {
-        map.eachLayer(function (layer) {
-            if (layer instanceof L.Marker) {
-                map.removeLayer(layer);
-            }
-        });
         const x = e.latlng.lat;
         const y = e.latlng.lng;
         const marker = L.marker([x, y]).addTo(map);
@@ -64,8 +60,19 @@
     </script>
     {%for r in redes %}
     <script>
-        L.marker([{{ r.latitud }}, {{ r.longitud }}]).addTo(map);
-    </script>
+        L.marker([{{ r.latitud }}, {{ r.longitud }}]).addTo(map).on('click', function(e) {
+            const popupContent = "<b>Red Information</b><br/>" +
+                "Name: {{ r.nombre }}<br/>" +
+                {% if r.estado %}
+                    "Status: Online<br/>"
+                {% else %}
+                    "Status: Offline<br/>"
+                {% endif %}+
+                "<a href='/ponte/red/{{ r.id_red }}' class='buttonpop'><button>View Details</button></a>";
+            const markerPopup = L.popup().setContent(popupContent);
+            this.bindPopup(markerPopup).openPopup();
+        });
+        </script>
     {% endfor %}
     </div>
     </div>

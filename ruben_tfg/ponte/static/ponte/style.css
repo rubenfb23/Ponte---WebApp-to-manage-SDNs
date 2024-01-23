@@ -169,7 +169,16 @@ form {
     margin-left: 5px;
 }
 
+.logo {
+    width: auto;
+    height: auto;
+    max-width: 80%;
+    max-height: 80%;
+    margin: auto;
+}
+
 .red {
+    background-color: #f0f0f0;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);  
     display: flex;
     max-height: 5%;
@@ -183,18 +192,17 @@ form {
     background-color: #d5d5d5;
     color: black;
     border: 1px solid grey;
-    display: grid;
     width: 20%;
     text-align: center;
     height: 100%;
     min-height: 100%;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
     flex-shrink: 0;
     align-content: space-between;
     align-items: stretch;
 }
 
 .header {
+    display: flex;
     color: black;
     width: 100%;
     text-align: center;
