@@ -35,6 +35,8 @@ class Red(models.Model):
     ip = models.CharField(max_length=20)
     mascara = models.CharField(max_length=20)
     puerta_enlace = models.CharField(max_length=20)
+    latitud = models.CharField(max_length=20)
+    longitud = models.CharField(max_length=20)
     dispositivos = models.ManyToManyField(Dispositivo)
 
     def __str__(self):
