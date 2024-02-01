@@ -10,6 +10,20 @@ html,body {
     display: flex;
 }
 
+ul {
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+li {
+    text-align: left;
+}
+
+a, a:hover, a:vissited, a:active {
+    color: black;
+    text-decoration: none;
+   }
+
 .global {
     height: 100%;
     width: 100%;
@@ -131,10 +145,6 @@ form {
     font-size: 16px;
 }
 
-a, a:hover, a:visited, a:active {
-    color: black;
-    text-decoration: none;
-   }
 
 .redes{
     margin: 10px 0;
@@ -150,9 +160,10 @@ a, a:hover, a:visited, a:active {
     padding: 10px;
     border-radius: 10px;
     list-style: none;
-    width: 98%;
-    height: 98%;
+    width: 95%;
+    height: 95%;
     margin: auto;
+    background-color: cadetblue;
 }
 
 .formulario{

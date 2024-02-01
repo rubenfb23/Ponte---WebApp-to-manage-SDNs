@@ -1,6 +1,5 @@
 function createTopology(dispositivos) {
     
-    console.log(dispositivos);
     // Your d3 network chart code goes here
     // Example code for creating a network chart using d3.js
     // Replace this code with your own implementation
@@ -20,7 +19,6 @@ function createTopology(dispositivos) {
     for (var i = 0; i < dispositivos.length; i++) {
         var nombre = dispositivos[i].nombre;
         var id = i;
-
         nodes.push({ name: nombre, id: id });
     }
 
@@ -34,9 +32,10 @@ function createTopology(dispositivos) {
     var simulation = d3.forceSimulation(nodes)
         .force("link", d3.forceLink(links).id(function(d) { return d.id; }))
         .force("charge", d3.forceManyBody().strength(-200)) // Increase the repulsion force
-        .force("mindistance", d3.forceManyBody().distanceMin(1)) // Increase the repulsion force
+        .force("mindistance", d3.forceManyBody().distanceMin(100)) // Increase the repulsion force
         .force("center", d3.forceCenter(svg_width/2, svg_height/2))
-        .force("collision", d3.forceCollide().radius(50)); // Add collision force with a radius of 50
+        .force("collision", d3.forceCollide().radius(50)) // Add collision force with a radius of 50
+        .force("x", d3.forceX(svg_width/2));
 
     // Create the links
     var link = svg.selectAll(".link")
@@ -53,6 +52,28 @@ function createTopology(dispositivos) {
         .enter()
         .append("g")
         .attr("class", "node")
+        .on("mouseover", function(d) {
+            d3.select(this).select("circle").transition()
+                .duration(250)
+                .attr("r", 50)
+                .attr("stroke", "red")
+            d3.select(this).select("text").transition()
+                .duration(250)
+                .attr("font-size", 30)
+        })
+        .on("mouseout", function(d) {
+            d3.select(this).select("circle").transition()
+                .duration(250)
+                .attr("r", 40)
+                .attr("stroke", "blue")
+            d3.select(this).select("text").transition()
+                .duration(250)
+                .attr("font-size", 20)
+        })
+        .call(d3.drag()
+            .on("start", dragstarted)
+            .on("drag", dragged)
+        )
         .call(d3.drag()
             .on("start", dragstarted)
             .on("drag", dragged)
@@ -84,7 +105,11 @@ function createTopology(dispositivos) {
                     return "device_unknown";
             }
         }
-    );
+        )
+    .on("click", function(d) {
+        console.log("Node clicked:", d);
+        // Handle node click event here
+    });
 
     // Update the simulation on each tick
     simulation.on("tick", function() {
@@ -111,10 +136,73 @@ function createTopology(dispositivos) {
         d.fy = d3.event.y;
     }
 
-    function dragended(d) {
-        if (!d3.event.active) simulation.alphaTarget(0);
-        d.fx = null;
-        d.fy = null;
+    var autorefreshEnabled = false;
+
+    // Create the toggle switch
+    var toggleSwitchOutside = svg.append("g")
+        .attr("class", "toggle-switch-outside")
+        .attr("transform", "translate(" + (svg_width-105) + ", 5)")
+
+    var toggleSwitch = svg.append("g")
+        .attr("class", "toggle-switch")
+        .attr("transform", "translate(" + (svg_width-70) + ", 10)")
+        .on("click", toggleAutorefresh);
+
+    toggleSwitchOutside.append("rect")
+        .attr("width", 100)
+        .attr("height", 40)
+        .attr("rx", 15)
+        .attr("ry", 15)
+        .attr("fill", "beige");
+
+    toggleSwitch.append("rect")
+        .attr("width", 60)
+        .attr("height", 30)
+        .attr("rx", 15)
+        .attr("ry", 15)
+        .attr("fill", function() {
+            if (autorefreshEnabled) {
+                return "lightgreen";
+            } else {
+                return "lightcoral";
+            }
+        });
+
+    toggleSwitch.append("circle")
+        .attr("cx", function() {
+            if (autorefreshEnabled) {
+                return 45;
+            } else {
+                return 15;
+            }
+        })
+        .attr("cy", 15)
+        .attr("r", 12)
+        .attr("fill", "white");
+
+    toggleSwitch.append("text")
+        .attr("x", -30)
+        .attr("y", 27)
+        .attr("class", "material-icons")
+        .text("refresh");
+
+    // Function to toggle autorefresh
+    function toggleAutorefresh() {
+        autorefreshEnabled = !autorefreshEnabled;
+        if (autorefreshEnabled) {
+            toggleSwitch.select("rect").transition()
+                .duration(250)
+                .attr("fill", "lightgreen");
+            toggleSwitch.select("circle").transition()
+                .duration(250)
+                .attr("cx", 45);
+        } else {
+            toggleSwitch.select("rect").transition()
+                .duration(250)
+                .attr("fill", "lightcoral");
+            toggleSwitch.select("circle").transition()
+                .duration(250)
+                .attr("cx", 15);
+        }
     }
-    
 }

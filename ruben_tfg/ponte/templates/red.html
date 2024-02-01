@@ -24,12 +24,27 @@
         <p>IP: {{red.ip}}</p>
         <p>Máscara: {{red.mascara}}</p>
         <p>Puerta de enlace: {{red.puerta_enlace}}</p>
-        <p>Latitud: {{red.latitud}}</p>
-        <p>Longitud: {{red.longitud}}</p>
         <p>Dispositivos:</p>
         <ul>
             {% for dispositivo in red.dispositivos.all %}
-                <p>{{ dispositivo }}</p>
+                <li>
+                    {% if dispositivo.nombre == "Router" %}
+                        <span class="material-icons">router</span>
+                    {% elif dispositivo.nombre == "Switch" %}
+                        <span class="material-icons">settings_ethernet</span>
+                    {% elif dispositivo.nombre == "PC" %}
+                        <span class="material-icons">computer</span>
+                    {% elif dispositivo.nombre == "Servidor" %}
+                        <span class="material-icons">dns</span>
+                    {% elif dispositivo.nombre == "Access Point" %}
+                        <span class="material-icons">wifi</span>
+                    {% elif dispositivo.nombre == "Raspberry" %}
+                        <span class="material-icons">developer_board</span>
+                    {% else %}
+                        <span class="material-icons">device_unknown</span>
+                    {% endif %}
+                    {{ dispositivo }}
+                </li>
             {% endfor %}
         </ul>
     </div>
