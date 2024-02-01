@@ -9,44 +9,14 @@
     <div class='header'>
         <a href='/'><img src="{% static 'ponte/img/casa.png' %}" class='logo'/></a>
     </div>
-    <h1 class='title'>Crear Red</h1>
-    <div>
-        <form>
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" required title="Este campo es obligatorio">
-
-            <label for="descripcion">Descripción:</label>
-            <input type="text" id="descripcion" name="descripcion" required title="Este campo es obligatorio">
-
-            <label for="tipo">Tipo:</label>
-            <select id="tipo" name="tipo" required title="Este campo es obligatorio">
-                <option value="educativa">Educativa</option>
-                <option value="personal">Personal</option>
-                <option value="empresarial">Empresarial</option>
-            </select>
-
-            <label for="ip">IP:</label>
-            <input type="text" id="ip" name="ip" required title="Este campo es obligatorio">
-
-            <label for="mascara">Máscara:</label>
-            <input type="text" id="mascara" name="mascara" required title="Este campo es obligatorio">
-
-            <label for="puerta_enlace">Puerta de enlace:</label>
-            <input type="text" id="puerta_enlace" name="puerta_enlace" required title="Este campo es obligatorio">
-
-            <label for="latitud">Latitud:</label>
-            <input type="text" id="latitud" name="latitud" value={{latitud}} required disabled>
-
-            <label for="longitud">Longitud:</label>
-            <input type="text" id="longitud" name="longitud" value={{longitud}} required disabled>
-
-            <label for="dispositivos">Dispositivos:</label>
-            <select id="dispositivos" name="dispositivos" multiple>
-                {% for dispositivo in dispositivos %}
-                <option value="{{ dispositivo.id }}">{{ dispositivo.nombre }}</option>
-                {% endfor %}
-            </select>
-
+    <div class='formulario'>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+             {{ form.as_p }}
+             {%if form.errors%}
+                <p>Algunos campos no son validos</p>
+             {%endif%}
+            <br/>
             <input class="submit" type="submit" value="Create">
         </form>
     </div>

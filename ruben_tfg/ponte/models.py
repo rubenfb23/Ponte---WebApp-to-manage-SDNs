@@ -13,6 +13,7 @@ class Servicio(models.Model):
     descripcion = models.CharField(max_length=20)
     tipo = models.CharField(max_length=20)
     estado = models.CharField(max_length=20)
+    puerto = models.CharField(max_length=20)
 
     def __str__(self):
         return self.nombre
@@ -27,6 +28,8 @@ class Dispositivo(models.Model):
     estado = models.CharField(max_length=20)
     sistema_operativo = models.CharField(max_length=20)
     servicios = models.ManyToManyField(Servicio)
+    ip_privada = models.CharField(max_length=20)
+    mac = models.CharField(max_length=20)
 
     def __str__(self):
         return self.nombre

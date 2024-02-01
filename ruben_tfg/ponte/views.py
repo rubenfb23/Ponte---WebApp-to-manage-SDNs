@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, request
+from django.forms import forms
 from .models import Red, Grupo, Dispositivo, Servicio
+from .forms import RedForm
 
 
 def index(request):
@@ -12,17 +14,26 @@ def index(request):
 
 def red(request, id_red):
     red = get_object_or_404(Red, pk=id_red)
+    dispositivos = red.dispositivos.all()
     return render(request, 'red.html', {
         'red': red,
+        'dispositivos': dispositivos,
     })
 
 
 def crear_red(request, latitud, longitud):
-    dispositivos = Dispositivo.objects.all()
+    context = {}
+
+    form = RedForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+
+    form.fields['latitud'].initial = latitud
+    form.fields['longitud'].initial = longitud
+    
+    context['form'] = form
     return render(request, 'crear_red.html', {
-        'latitud': latitud,
-        'longitud': longitud,
-        'dispositivos': dispositivos,
+        'form': form,
     })
 
 

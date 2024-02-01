@@ -10,13 +10,11 @@
      <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
      crossorigin=""></script>
+     <script src="{% static 'ponte/map.js' %}"></script>
 </head>
 <body>
     <div class='global'>
     <div class='navbar'>
-        <div class='header'>
-            <img src="{% static 'ponte/img/casa.png' %}" class='logo'/>
-        </div>
         <div class='redes'>
         <h1>Redes</h1>
         {% for r in redes %}
@@ -40,29 +38,16 @@
             <a href='/ponte/configuracion' class='button'><button>Configuración</button></a>
         </div>
     </div>
-    <div id="map"></div>
+    <div id="map">
     <script>
-    const map = L.map('map').setView([42.755, -7.8661], 8);
+        map = createMap();
 
-    L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-        maxZoom: 18
-    }).addTo(map);
-    
-    map.on('click', function(e) {
-        const x = e.latlng.lat;
-        const y = e.latlng.lng;
-        const marker = L.marker([x, y]).addTo(map);
-        marker.bindPopup("<b>Coordenadas</b><br/>" + x + ", " + y + "<br/><a href='/ponte/red/crear_red/" + x + "," + y + "' class='buttonpop'><button>Crear red aquí</button></a>").openPopup();
-        const container = document.getElementsByClassName('leaflet-control-container')[0];
-        const customControl = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
-        container.appendChild(customControl);
-    });
-    </script>
-    {%for r in redes %}
-    <script>
-        L.marker([{{ r.latitud }}, {{ r.longitud }}]).addTo(map).on('click', function(e) {
-            const popupContent = "<b>Red Information</b><br/>" +
-                "Name: {{ r.nombre }}<br/>" +
+        {%for r in redes %}
+        var marker = L.marker([{{r.latitud}}, {{r.longitud}}]);
+        marker.addTo(map);
+        marker.on('click', function() {
+            const popupContent = "<b>Network Information</b><br/>" +
+                 "Name: {{ r.nombre }}<br/>" +
                 {% if r.estado %}
                     "Status: Online<br/>"
                 {% else %}
@@ -72,8 +57,10 @@
             const markerPopup = L.popup().setContent(popupContent);
             this.bindPopup(markerPopup).openPopup();
         });
-        </script>
-    {% endfor %}
+        {% endfor %}
+    </script>
+
+    </div>
     </div>
     </div>
 </body>
