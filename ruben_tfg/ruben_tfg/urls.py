@@ -31,4 +31,5 @@ urlpatterns = [
     path('ponte/grupo/<int:id_grupo>', views.grupo, name='grupo'),
     path('ponte/grupo/crear_grupo', views.crear_grupo, name='crear_grupo'),
     path('ponte/configuracion', views.configuracion, name='configuracion'),
+    path('ponte/ancla/<int:id_ancla>', views.ancla, name='ancla'),
 ]

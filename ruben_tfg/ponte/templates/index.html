@@ -21,24 +21,45 @@
         {% for r in redes %}
                 {% if r.estado == 1 %}
                 <div class='red' onclick="window.location.href='ponte/red/{{ r.id_red }}';">
+                    <span id='redicon' class='material-icons'>lan</span>
                     <a class='redbutton'> {{ r.nombre }}</a>
                     <span class='verde'/>
                     <br/>
                 </div>
                 {% else %}
                 <div class='red' onclick="window.location.href='ponte/red/{{ r.id_red }}';">
+                    <span id='redicon' class='material-icons'>lan</span>
                     <a class='redbutton'>{{ r.nombre }}</a>
                     <span class='rojo'/>
                 </div>
                 {% endif %}
         {% endfor %}
         </div>
+        <div class='anclas'>
+            <h1>Anclas</h1>
+            {% for a in anclas %}
+                {% if a.estado == 1 %}
+                <div class='ancla' onclick="window.location.href='ponte/ancla/{{ a.id_ancla }}';">
+                    <span id='anclaicon' class='material-icons'>hub</span>
+                    <a class='anclabutton'> {{ a.nombre }}</a>
+                    <span class='verde'/>
+                    <br/>
+                </div>
+                {% else %}
+                <div class='ancla' onclick="window.location.href='ponte/ancla/{{ a.id_ancla }}';">
+                    <span id='anclaicon' class='material-icons'>hub</span>
+                    <a class='anclabutton'>{{ a.nombre }}</a>
+                    <span class='rojo'/>
+                </div>
+                {% endif %}
+            {% endfor %}
         <div class='buttons'>
             <a class='button'><button>Crear Grupo</button></a>
             <a href='/ponte/red/crear_red/0,0' class='button'><button>Crear Red</button></a>
             <a href='/ponte/configuracion' class='button'><button>Configuración</button></a>
         </div>
     </div>
+</div>
     <div id="map">
     <script>
         map = createMap();

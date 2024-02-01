@@ -118,6 +118,10 @@ label {
     margin-top: 20px;
 }
 
+#redicon, #anclaicon {
+    margin: inherit;
+}
+
 form {
     display: list-item;
     width: 50%;
@@ -135,7 +139,7 @@ form {
     font-size: 16px;
 }
 
-.redbutton {
+.redbutton, .anclabutton {
     border: none;
     color: black;
     padding: 10px 20px;
@@ -146,7 +150,7 @@ form {
 }
 
 
-.redes{
+.redes, .anclas {
     margin: 10px 0;
     padding: 10px;
     border-radius: 10px;
@@ -208,7 +212,7 @@ form {
     margin: auto;
 }
 
-.red {
+.red, .ancla {
     background-color: #f0f0f0;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);  
     display: flex;

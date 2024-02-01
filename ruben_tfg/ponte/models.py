@@ -52,6 +52,19 @@ class Red(models.Model):
         return self.nombre
 
 
+class Ancla(models.Model):
+    id_ancla = models.AutoField(primary_key=True)
+    ip_publica = models.CharField(max_length=20)
+    nombre = models.CharField(max_length=20)
+    descripcion = models.CharField(max_length=20)
+    tipo = models.CharField(max_length=20)
+    estado = models.CharField(max_length=20)
+    latitud = models.CharField(max_length=20)
+    longitud = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.nombre
+
 class Grupo(models.Model):
     id_grupo = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=20)

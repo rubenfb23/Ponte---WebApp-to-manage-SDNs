@@ -1,14 +1,16 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, request
 from django.forms import forms
-from .models import Red, Grupo, Dispositivo, Servicio
+from .models import Red, Grupo, Dispositivo, Servicio, Ancla
 from .forms import RedForm
 
 
 def index(request):
     redes = Red.objects.all()
+    anclas = Ancla.objects.all()
     return render(request, 'index.html', {
         'redes': redes,
+        'anclas': anclas,
     })
 
 
@@ -21,6 +23,13 @@ def red(request, id_red):
     })
 
 
+def ancla(request, id_ancla):
+    ancla = get_object_or_404(Ancla, pk=id_ancla)
+    return render(request, 'ancla.html', {
+        'ancla': ancla,
+    })
+
+
 def crear_red(request, latitud, longitud):
     context = {}
 
@@ -30,7 +39,7 @@ def crear_red(request, latitud, longitud):
 
     form.fields['latitud'].initial = latitud
     form.fields['longitud'].initial = longitud
-    
+
     context['form'] = form
     return render(request, 'crear_red.html', {
         'form': form,
