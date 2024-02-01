@@ -15,6 +15,7 @@ function createTopology(dispositivos) {
 
     var nodes = [];
     var links = [];
+    
     // Define the data for the network
     for (var i = 0; i < dispositivos.length; i++) {
         var nombre = dispositivos[i].nombre;
@@ -70,6 +71,11 @@ function createTopology(dispositivos) {
                 .duration(250)
                 .attr("font-size", 20)
         })
+        .on("click", function(d) {
+            console.log("Node clicked:", d);
+            // Open modal window here
+            openModal(d);
+        })
         .call(d3.drag()
             .on("start", dragstarted)
             .on("drag", dragged)
@@ -86,7 +92,8 @@ function createTopology(dispositivos) {
         .attr("stroke", "blue")
         .on("click", function(d) {
             console.log("Node clicked:", d);
-            // Handle node click event here
+            // Open modal window here
+            openModal(d);
         });
 
     node.append("text")
@@ -104,12 +111,12 @@ function createTopology(dispositivos) {
                 default:
                     return "device_unknown";
             }
-        }
-        )
-    .on("click", function(d) {
-        console.log("Node clicked:", d);
-        // Handle node click event here
-    });
+        })
+        .on("click", function(d) {
+            console.log("Node clicked:", d);
+            // Open modal window here
+            openModal(d);
+        });
 
     // Update the simulation on each tick
     simulation.on("tick", function() {
@@ -141,11 +148,11 @@ function createTopology(dispositivos) {
     // Create the toggle switch
     var toggleSwitchOutside = svg.append("g")
         .attr("class", "toggle-switch-outside")
-        .attr("transform", "translate(" + (svg_width-105) + ", 5)")
+        .attr("transform", "translate(" + (5) + ", 5)")
 
     var toggleSwitch = svg.append("g")
         .attr("class", "toggle-switch")
-        .attr("transform", "translate(" + (svg_width-70) + ", 10)")
+        .attr("transform", "translate(" + (35) + ", 10)")
         .on("click", toggleAutorefresh);
 
     toggleSwitchOutside.append("rect")
@@ -204,5 +211,47 @@ function createTopology(dispositivos) {
                 .duration(250)
                 .attr("cx", 15);
         }
+    }
+
+    // Function to open modal window
+    function openModal(d) {
+        // Check if a modal is already open
+        var existingModal = document.querySelector(".modal");
+        if (existingModal) {
+            // Remove the existing modal
+            existingModal.remove();
+        }
+
+        // Create a modal window
+        var modal = document.createElement("div");
+        modal.classList.add("modal");
+
+        // Create modal content
+        var modalContent = document.createElement("div");
+        modalContent.classList.add("modal-content");
+
+        // Create close button
+        var closeButton = document.createElement("span");
+        closeButton.classList.add("material-icons");
+        closeButton.textContent = "close";
+
+        // Add event listener to close the modal
+        closeButton.addEventListener("click", function() {
+            modal.remove();
+        });
+
+        // Append close button to modal content
+        modalContent.appendChild(closeButton);
+
+        // Create and append information to modal content
+        var info = document.createElement("p");
+        info.textContent = "This is the information you want to display.";
+        modalContent.appendChild(info);
+
+        // Append modal content to modal window
+        modal.appendChild(modalContent);
+
+        // Append modal window to the document body
+        document.body.appendChild(modal);
     }
 }
