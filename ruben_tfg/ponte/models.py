@@ -30,7 +30,6 @@ class Dispositivo(models.Model):
     servicios = models.ManyToManyField(Servicio)
     ip_privada = models.CharField(max_length=20)
     mac = models.CharField(max_length=20)
-    links = models.
 
     def __str__(self):
         return self.nombre

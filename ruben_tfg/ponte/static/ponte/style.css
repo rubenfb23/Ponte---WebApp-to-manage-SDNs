@@ -119,7 +119,7 @@ label {
 }
 
 form {
-    display: grid;
+    display: list-item;
     width: 50%;
     margin: auto;
     margin-top: 0px;

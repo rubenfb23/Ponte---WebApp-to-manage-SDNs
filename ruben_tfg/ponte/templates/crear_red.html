@@ -4,18 +4,19 @@
 <head>
     <title>Crear Red</title>
     <link rel="stylesheet" href="{% static 'ponte/style.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
     <div class='header'>
-        <a href='/'><img src="{% static 'ponte/img/casa.png' %}" class='logo'/></a>
+        <span class='material-icons'><a href="/">home</a></span>
     </div>
     <div class='formulario'>
-        <form method="POST" enctype="multipart/form-data">
+        <form class='form' method="POST" enctype="multipart/form-data">
             {% csrf_token %}
              {{ form.as_p }}
-             {%if form.errors%}
-                <p>Algunos campos no son validos</p>
-             {%endif%}
+             {% if form.errors %}
+                <p>Algunos campos no son validos!</p>
+             {% endif %}
             <br/>
             <input class="submit" type="submit" value="Create">
         </form>

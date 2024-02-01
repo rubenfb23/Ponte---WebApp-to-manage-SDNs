@@ -94,7 +94,8 @@ function createTopology(dispositivos) {
             console.log("Node clicked:", d);
             // Open modal window here
             openModal(d);
-        });
+        })
+        .attr("cursor", "pointer");
 
     node.append("text")
         .attr("class", "material-icons")
@@ -116,7 +117,8 @@ function createTopology(dispositivos) {
             console.log("Node clicked:", d);
             // Open modal window here
             openModal(d);
-        });
+        })
+        .attr("cursor", "pointer");
 
     // Update the simulation on each tick
     simulation.on("tick", function() {
