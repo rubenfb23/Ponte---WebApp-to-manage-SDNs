@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, request
 from django.forms import forms
 from .models import Red, Grupo, Dispositivo, Servicio, Ancla
-from .forms import RedForm
+from .forms import RedForm, AnclaForm
 
 
 def index(request):
@@ -42,6 +42,22 @@ def crear_red(request, latitud, longitud):
 
     context['form'] = form
     return render(request, 'crear_red.html', {
+        'form': form,
+    })
+
+
+def crear_ancla(request, latitud, longitud):
+    context = {}
+
+    form = AnclaForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+
+    form.fields['latitud'].initial = latitud
+    form.fields['longitud'].initial = longitud
+
+    context['form'] = form
+    return render(request, 'crear_ancla.html', {
         'form': form,
     })
 

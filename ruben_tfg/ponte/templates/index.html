@@ -11,7 +11,7 @@
      <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
      crossorigin=""></script>
-     <script src="{% static 'ponte/map.js' %}"></script>
+     <script src="{% static 'ponte/js/map.js' %}"></script>
 </head>
 <body>
     <div class='global'>
@@ -53,12 +53,13 @@
                 </div>
                 {% endif %}
             {% endfor %}
+        </div>
         <div class='buttons'>
             <a class='button'><button>Crear Grupo</button></a>
             <a href='/ponte/red/crear_red/0,0' class='button'><button>Crear Red</button></a>
+            <a href='/ponte/ancla/crear_ancla/0,0' class='button'><button>Crear Ancla</button></a>
             <a href='/ponte/configuracion' class='button'><button>Configuración</button></a>
         </div>
-    </div>
 </div>
     <div id="map">
     <script>
