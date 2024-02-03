@@ -20,10 +20,11 @@ function createMap() {
 
         // Use default icon for marker
         marker = L.marker([x, y]).addTo(map);
-        marker.bindPopup("<b>Coordenadas</b><br/>" + x + ", " + y + "<br/><a href='/ponte/red/crear_red/" + x + "," + y + "' class='buttonpop'><button>Crear red aquí</button></a>").openPopup();
+        marker.bindPopup("<b>Coordenadas</b><br/>" + x + ", " + y + "<br/><a href='/ponte/red/crear_red/" + x + "," + y + "' class='buttonpop'><button>Crear red aquí</button></a>"+ "<br/><a href='/ponte/red/crear_ancla/" + x + "," + y + "' class='buttonpop'><button>Crear ancla aquí</button></a>").openPopup();
         const container = document.getElementsByClassName('leaflet-control-container')[0];
         const customControl = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
         container.appendChild(customControl);
+        
     });
     return map;
 }

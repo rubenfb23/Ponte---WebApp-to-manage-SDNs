@@ -227,6 +227,15 @@ form {
     margin: 5px;
 }
 
+.buttonpop {
+    border: none;
+    color: white;
+    text-decoration: solid;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 2%;
+}
+
 .navbar {
     background-color: #d5d5d5;
     color: black;

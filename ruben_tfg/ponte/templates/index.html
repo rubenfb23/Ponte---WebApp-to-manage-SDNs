@@ -64,6 +64,13 @@
     <div id="map">
     <script>
         map = createMap();
+        
+        customIcon = L.icon({
+            iconUrl: '{% static 'ponte/images/anchor.png' %}',
+            iconSize: [30, 30],
+            iconAnchor: [15, 15],
+            popupAnchor: [0, -15]
+        });
 
         {%for r in redes %}
         var marker = L.marker([{{r.latitud}}, {{r.longitud}}]);
@@ -82,7 +89,7 @@
         });
         {% endfor %}
         {%for a in anclas %}
-        var marker = L.marker([{{a.latitud}}, {{a.longitud}}]);
+        var marker = L.marker([{{a.latitud}}, {{a.longitud}}], {icon: customIcon});
         marker.addTo(map);
         marker.on('click', function() {
             const popupContent = "<b>Anchor Information</b><br/>" +
