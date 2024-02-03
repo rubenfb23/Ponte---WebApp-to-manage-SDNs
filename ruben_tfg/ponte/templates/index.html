@@ -66,13 +66,22 @@
 </div>
     <div id="map">
     <script>
+
+        var markers = L.markerClusterGroup({
+            spiderfyOnMaxZoom: true,
+            disableClusteringAtZoom: 20,
+            maxClusterRadius: 200,
+
+        });
+
         map = createMap();
         
         customIconAncla = L.icon({
             iconUrl: '{% static 'ponte/images/anchor.png' %}',
             iconSize: [35, 35],
             iconAnchor: [15, 15],
-            popupAnchor: [0, -15]
+            popupAnchor: [0, -15],
+            
         });
 
         customIconRed = L.icon({
@@ -82,11 +91,10 @@
             popupAnchor: [0, -15]
         });
 
-        var markers = L.markerClusterGroup();
 
         {%for r in redes %}
         var marker = L.marker([{{r.latitud}}, {{r.longitud}}], {icon: customIconRed});
-        marker.addTo(map);
+        marker.addTo(markers); // Add the marker to the marker cluster group instead of the map
         marker.on('click', function() {
             const popupContent = "<b>Network Information</b><br/>" +
                  "Name: {{ r.nombre }}<br/>" +
@@ -99,12 +107,10 @@
             const markerPopup = L.popup().setContent(popupContent);
             this.bindPopup(markerPopup).openPopup();
         });
-        markers.addLayer(marker);
         {% endfor %}
-        map.addLayer(markers);
         {%for a in anclas %}
         var marker = L.marker([{{a.latitud}}, {{a.longitud}}], {icon: customIconAncla});
-        marker.addTo(map);
+        marker.addTo(markers); // Add the marker to the marker cluster group instead of the map
         marker.on('click', function() {
             const popupContent = "<b>Anchor Information</b><br/>" +
                  "Name: {{ a.nombre }}<br/>" +
@@ -117,10 +123,9 @@
             const markerPopup = L.popup().setContent(popupContent);
             this.bindPopup(markerPopup).openPopup();
         });
-        markers.addLayer(marker);
         {% endfor %}
-
-        map.addLayer(markers);
+        
+        map.addLayer(markers);   
         
     </script>
 

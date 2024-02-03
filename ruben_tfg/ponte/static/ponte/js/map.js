@@ -4,7 +4,10 @@ function createMap() {
     const map = L.map('map').setView([42.755, -7.8661], 8);
 
     L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-        maxZoom: 18
+        maxZoom: 18,
+        minZoom: -3,
+        markerZoomAnimation: false,
+        zoomControl: false,
     }).addTo(map);
 
     let marker;

@@ -14,6 +14,12 @@
         <form class='form' method="POST" enctype="multipart/form-data">
             {% csrf_token %}
              {{ form.as_p }}
+             {%if form.errors%}
+                <p class='error'>Por favor corrija los errores abajo</p>
+            {%endif%}
+            {% if form.success %}
+                <p class='success'>Red creada con éxito</p>
+            {% endif %}
             <br/>
             <input class="submit" type="submit" value="Create">
         </form>
