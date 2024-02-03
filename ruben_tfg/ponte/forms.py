@@ -35,7 +35,8 @@ class NetworkForm(forms.ModelForm):
             {'class': 'form-control'})
         self.fields['type'].widget.attrs.update({'class': 'form-control'})
         self.fields['ip'].widget.attrs.update({'class': 'form-control'})
-        self.fields['subnet_mask'].widget.attrs.update({'class': 'form-control'})
+        self.fields['subnet_mask'].widget.attrs.update(
+            {'class': 'form-control'})
         self.fields['gateway'].widget.attrs.update(
             {'class': 'form-control'})
         self.fields['latitude'].widget.attrs.update({'class': 'form-control'})
