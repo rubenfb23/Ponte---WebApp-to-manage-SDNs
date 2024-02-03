@@ -1,29 +1,189 @@
 html,body {
     background-color: #f5f5f5;
     font-family: 'Roboto', sans-serif;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 400;
-    line-height: 1.6;
     color: #333;
     height: 100%;
-    min-height: 100%;
+    width: 100%;
+    margin: 0;
+    display: flex;
+}
+
+ul {
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+li {
+    text-align: left;
+}
+
+a, a:hover, a:vissited, a:active {
+    color: black;
+    text-decoration: none;
+   }
+
+.global {
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
+
+#map{
+    height: 100%;
+    width: 100%;
+    flex-grow: 1;
+}
+
+.class {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.topologia {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+select {
+    font-size: 16px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin: 1px;
+    border-radius: 10px;
+}
+
+option {
+    font-size: 16px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin: 1px;
+    border-radius: 5px;
 }
 
 h1 {
-    font-size: 36px;
-    font-weight: bolder;
-    line-height: 1.2;
-    margin-top: 0;
+    font-size: 28px;
+    font-weight: 600;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.submit {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: solid;
+    display: inline-block;
+    font-size: 16px;
+    width: 25%;
+    align-items: center;
+    margin: auto;
     margin-bottom: 10px;
 }
 
-.redes {
-    max-width: 98%;
-    display: flow;
-    vertical-align: top;
-    background-color: #ede3aa;
+.buttons{
+    display: grid;
+    width: 90%;
     margin: auto;
+    justify-items: left ;
+    margin: auto;
+    margin-top: 5%;
+}
+
+label, input {
+    display: block;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+
+}
+
+label {
+    font-weight: 600;
+    margin-top: 20px;
+}
+
+#redicon, #anclaicon {
+    margin: inherit;
+}
+
+form {
+    display: list-item;
+    width: 50%;
+    margin: auto;
+    margin-top: 0px;
+}
+
+.button{
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: solid;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.redbutton, .anclabutton {
+    border: none;
+    color: black;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: solid;
+    display: inline-block;
+    font-size: 16px;
+}
+
+
+.redes, .anclas {
+    margin: 10px 0;
+    padding: 10px;
     border-radius: 10px;
+    list-style: none;
+    width: 90%;
+    margin: auto;
+}
+
+#box{
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 10px;
+    list-style: none;
+    width: 95%;
+    height: 95%;
+    margin: auto;
+    background-color: cadetblue;
+}
+
+.formulario{
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 10px;
+    list-style: none;
+    width: 90%;
+    margin: auto;
+}
+
+.contenido{
+    display: contents;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
 }
 
 .verde {
@@ -44,28 +204,41 @@ h1 {
     margin-left: 5px;
 }
 
-.red {  
+.logo {
+    width: auto;
+    height: auto;
+    max-width: 80%;
+    max-height: 80%;
+    margin: auto;
+}
+
+.red, .ancla {
+    background-color: #f0f0f0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);  
     display: flex;
-    margin-left: 10px;
     max-height: 5%;
     width: 90%;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin: 5px;
 }
 
 .navbar {
-    background-color: #bfbfbf;
+    background-color: #d5d5d5;
     color: black;
-    border-radius: 10px;
-    border: 1px solid black;
-    display: flow;
-    width: 30%;
+    border: 1px solid grey;
+    width: 20%;
     text-align: center;
-    height: 98%;
-    min-height: 98%;
+    height: 100%;
+    flex-shrink: 0;
+    align-content: space-between;
+    align-items: stretch;
 }
 
 .header {
+    display: flex;
     color: black;
-    width: 100%;
+    width: 10%;
     text-align: center;
     height: 10%;
 }

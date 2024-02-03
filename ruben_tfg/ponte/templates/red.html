@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Red</title>
+    <link rel="stylesheet" href="{% static 'ponte/style.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="{% static 'ponte/topologia.js' %}"></script>
+    <script src="https://d3js.org/d3.v4.js"></script>
+</head>
+<body>
+<div class='global'>
+    <div class='navbar'>
+        <div class='header'>
+            <span class='material-icons'><a href="/">home</a></span>
+        </div>
+        <div class='contenido'>
+        <h1>Red</h1>
+        <span class='material-icons'>lan</span>
+        <p>Nombre: {{red.nombre}}</p>
+        <p>Descripción: {{red.descripcion}}</p>
+        <p>Tipo: {{red.tipo}}</p>
+        <p>Estado: {% if red.estado %}Online{% else %}Offline{% endif %}</p>
+        <p>IP: {{red.ip}}</p>
+        <p>Máscara: {{red.mascara}}</p>
+        <p>Puerta de enlace: {{red.puerta_enlace}}</p>
+        <p>Dispositivos:</p>
+        <ul>
+            {% for dispositivo in red.dispositivos.all %}
+                <li>
+                    {% if dispositivo.nombre == "Router" %}
+                        <span class="material-icons">router</span>
+                    {% elif dispositivo.nombre == "Switch" %}
+                        <span class="material-icons">settings_ethernet</span>
+                    {% elif dispositivo.nombre == "PC" %}
+                        <span class="material-icons">computer</span>
+                    {% elif dispositivo.nombre == "Servidor" %}
+                        <span class="material-icons">dns</span>
+                    {% elif dispositivo.nombre == "Access Point" %}
+                        <span class="material-icons">wifi</span>
+                    {% elif dispositivo.nombre == "Raspberry" %}
+                        <span class="material-icons">developer_board</span>
+                    {% else %}
+                        <span class="material-icons">device_unknown</span>
+                    {% endif %}
+                    {{ dispositivo }}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    </div>
+    <div class='topologia'>
+        <div id="box"></div>
+        <script> 
+            var dispositivos = [
+                {% for dispositivo in red.dispositivos.all %}
+                    {
+                        "nombre": "{{ dispositivo.nombre }}",
+                        "descripcion": "{{ dispositivo.descripcion }}",
+                        "tipo": "{{ dispositivo.tipo }}",
+                        "estado": "{{ dispositivo.estado }}",
+                        "ip": "{{ dispositivo.ip_privada }}",
+                        "mac": "{{ dispositivo.mac }}",
+                        "localizacion": "{{ dispositivo.localizacion }}",
+                        "id": "{{ dispositivo.id_dispositivo }}",
+                        "sistema_operativo": "{{ dispositivo.sistema_operativo }}",
+
+                    },
+                {% endfor %}
+            ];
+            createTopology(dispositivos);
+        </script>
+    </div>
+    </div>
+</div>
+</body>
+</html>

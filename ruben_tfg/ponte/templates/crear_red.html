@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crear Red</title>
+    <link rel="stylesheet" href="{% static 'ponte/style.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+<body>
+    <div class='header'>
+        <span class='material-icons'><a href="/">home</a></span>
+    </div>
+    <div class='formulario'>
+        <form class='form' method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+             {{ form.as_p }}
+            <br/>
+            <input class="submit" type="submit" value="Create">
+        </form>
+    </div>
+</body>
+</html>
