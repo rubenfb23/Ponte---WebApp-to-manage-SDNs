@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Anchor</title>
+    <link rel="stylesheet" href="{% static 'ponte/style.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="{% static 'ponte/js/topology.js' %}"></script>
+    <script src="https://d3js.org/d3.v4.js"></script>
+</head>
+<body>
+<div class='global'>
+    <div class='navbar'>
+        <div class='header'>
+            <span class='material-icons'><a href="/">home</a></span>
+        </div>
+        <div class='content'>
+        <h1>Anchor</h1>
+        <span class='material-icons'>hub</span>
+        <p>Name: {{anchor.name}}</p>
+        <p>Description: {{anchor.description}}</p>
+        <p>Type: {{anchor.type}}</p>
+        <p>Status: {{anchor.status}}</p>
+        <p>Public IP: {{anchor.public_ip}}</p>
+    </div>
+    </div>
+    <div class='topology'>
+        <div id="box"></div>
+        <script> 
+            var devices = [
+                {% for device in anchor.devices.all %}
+                    {
+                        "name": "{{ device.name }}",
+                        "description": "{{ device.description }}",
+                        "type": "{{ device.type }}",
+                        "status": "{{ device.status }}",
+                        "ip": "{{ device.private_ip }}",
+                        "mac": "{{ device.mac }}",
+                        "location": "{{ device.location }}",
+                        "id": "{{ device.device_id }}",
+                        "operating_system": "{{ device.operating_system }}",
+
+                    },
+                {% endfor %}
+            ];
+            createTopology(devices);
+        </script>
+    </div>
+    </div>
+</div>
+</body>
+</html>

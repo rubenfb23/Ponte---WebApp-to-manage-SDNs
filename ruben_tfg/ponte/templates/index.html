@@ -19,49 +19,49 @@
 <body>
     <div class='global'>
     <div class='navbar'>
-        <div class='redes'>
-        <h1>Redes</h1>
-        {% for r in redes %}
-                {% if r.estado == 1 %}
-                <div class='red' onclick="window.location.href='ponte/red/{{ r.id_red }}';">
+        <div class='networks'>
+        <h1>Networks</h1>
+        {% for n in networks %}
+                {% if n.state == 1 %}
+                <div class='network' onclick="window.location.href='ponte/network/{{ n.network_id }}';">
                     <span id='redicon' class='material-icons'>lan</span>
-                    <a class='redbutton'> {{ r.nombre }}</a>
-                    <span class='verde'/>
+                    <a class='redbutton'> {{ n.name }}</a>
+                    <span class='green'/>
                     <br/>
                 </div>
                 {% else %}
-                <div class='red' onclick="window.location.href='ponte/red/{{ r.id_red }}';">
-                    <span id='redicon' class='material-icons'>lan</span>
-                    <a class='redbutton'>{{ r.nombre }}</a>
-                    <span class='rojo'/>
+                <div class='network' onclick="window.location.href='ponte/network/{{ n.network_id }}';">
+                    <span id='networkicon' class='material-icons'>lan</span>
+                    <a class='networkbutton'>{{ n.name }}</a>
+                    <span class='red'/>
                 </div>
                 {% endif %}
         {% endfor %}
         </div>
-        <div class='anclas'>
-            <h1>Anclas</h1>
-            {% for a in anclas %}
-                {% if a.estado == 1 %}
-                <div class='ancla' onclick="window.location.href='ponte/ancla/{{ a.id_ancla }}';">
-                    <span id='anclaicon' class='material-icons'>hub</span>
-                    <a class='anclabutton'> {{ a.nombre }}</a>
-                    <span class='verde'/>
+        <div class='anchors'>
+            <h1>Anchors</h1>
+            {% for a in anchors %}
+                {% if a.state == 1 %}
+                <div class='anchor' onclick="window.location.href='ponte/anchor/{{ a.anchor_id }}';">
+                    <span id='anchoricon' class='material-icons'>hub</span>
+                    <a class='anchoricon'> {{ a.name }}</a>
+                    <span class='green'/>
                     <br/>
                 </div>
                 {% else %}
-                <div class='ancla' onclick="window.location.href='ponte/ancla/{{ a.id_ancla }}';">
-                    <span id='anclaicon' class='material-icons'>hub</span>
-                    <a class='anclabutton'>{{ a.nombre }}</a>
-                    <span class='rojo'/>
+                <div class='anchor' onclick="window.location.href='ponte/anchor/{{ a.anchor_id }}';">
+                    <span id='anchoricon' class='material-icons'>hub</span>
+                    <a class='anchorbutton'>{{ a.name }}</a>
+                    <span class='red'/>
                 </div>
                 {% endif %}
             {% endfor %}
         </div>
         <div class='buttons'>
-            <a class='button'><button>Crear Grupo</button></a>
-            <a href='/ponte/red/crear_red/0,0' class='button'><button>Crear Red</button></a>
-            <a href='/ponte/ancla/crear_ancla/0,0' class='button'><button>Crear Ancla</button></a>
-            <a href='/ponte/configuracion' class='button'><button>Configuración</button></a>
+            <a class='button'><button>Create Group</button></a>
+            <a href='/ponte/network/create_network/0,0' class='button'><button>Create Network</button></a>
+            <a href='/ponte/anchor/create_anchor/0,0' class='button'><button>Create Anchor</button></a>
+            <a href='/ponte/settings' class='button'><button>Settings</button></a>
         </div>
 </div>
     <div id="map">
@@ -92,34 +92,34 @@
         });
 
 
-        {%for r in redes %}
-        var marker = L.marker([{{r.latitud}}, {{r.longitud}}], {icon: customIconRed});
+        {%for n in networks %}
+        var marker = L.marker([{{n.latitud}}, {{n.longitude}}], {icon: customIconRed});
         marker.addTo(markers); // Add the marker to the marker cluster group instead of the map
         marker.on('click', function() {
             const popupContent = "<b>Network Information</b><br/>" +
-                 "Name: {{ r.nombre }}<br/>" +
+                 "Name: {{ n.name }}<br/>" +
                 {% if r.estado %}
                     "Status: Online<br/>"
                 {% else %}
                     "Status: Offline<br/>"
                 {% endif %}+
-                "<a href='/ponte/red/{{ r.id_red }}' class='buttonpop'><button>View Details</button></a>";
+                "<a href='/ponte/network/{{ n.network_id }}' class='buttonpop'><button>View Details</button></a>";
             const markerPopup = L.popup().setContent(popupContent);
             this.bindPopup(markerPopup).openPopup();
         });
         {% endfor %}
-        {%for a in anclas %}
-        var marker = L.marker([{{a.latitud}}, {{a.longitud}}], {icon: customIconAncla});
+        {%for a in anchors %}
+        var marker = L.marker([{{a.latitude}}, {{a.longitude}}], {icon: customIconAncla});
         marker.addTo(markers); // Add the marker to the marker cluster group instead of the map
         marker.on('click', function() {
             const popupContent = "<b>Anchor Information</b><br/>" +
-                 "Name: {{ a.nombre }}<br/>" +
-                {% if a.estado %}
+                 "Name: {{ a.name }}<br/>" +
+                {% if a.state %}
                     "Status: Online<br/>"
                 {% else %}
                     "Status: Offline<br/>"
                 {% endif %}+
-                "<a href='/ponte/ancla/{{ a.id_ancla }}' class='buttonpop'><button>View Details</button></a>";
+                "<a href='/ponte/anchor/{{ a.anchor_id }}' class='buttonpop'><button>View Details</button></a>";
             const markerPopup = L.popup().setContent(popupContent);
             this.bindPopup(markerPopup).openPopup();
         });

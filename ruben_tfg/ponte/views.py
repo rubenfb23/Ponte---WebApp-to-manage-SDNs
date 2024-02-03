@@ -1,78 +1,78 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Red, Ancla
-from .forms import RedForm, AnclaForm
+from .models import Network, Anchor
+from .forms import NetworkForm, AnchorForm
 from django.http import HttpResponse
 from django import forms
 
 
 def index(request):
-    redes = Red.objects.all()
-    anclas = Ancla.objects.all()
+    networks = Network.objects.all()
+    anchors = Anchor.objects.all()
     return render(request, 'index.html', {
-        'redes': redes,
-        'anclas': anclas,
+        'networks': networks,
+        'anchors': anchors,
     })
 
 
-def red(request, id_red):
-    red = get_object_or_404(Red, pk=id_red)
-    dispositivos = red.dispositivos.all()
-    return render(request, 'red.html', {
-        'red': red,
-        'dispositivos': dispositivos,
+def network(request, network_id):
+    network = get_object_or_404(Network, pk=network_id)
+    devices = network.devices.all()
+    return render(request, 'network.html', {
+        'network': network,
+        'devices': devices,
     })
 
 
-def ancla(request, id_ancla):
-    ancla = get_object_or_404(Ancla, pk=id_ancla)
-    return render(request, 'ancla.html', {
-        'ancla': ancla,
+def anchor(request, anchor_id):
+    anchor = get_object_or_404(Anchor, pk=anchor_id)
+    return render(request, 'anchor.html', {
+        'anchor': anchor,
     })
 
 
-def crear_red(request, latitud, longitud):
+def create_network(request, latitude, longitude):
     context = {}
 
-    form = RedForm(request.POST or None)
+    form = NetworkForm(request.POST or None)
     if form.is_valid():
         form.save()
 
-    form.fields['latitud'].initial = latitud
-    form.fields['longitud'].initial = longitud
-    form.fields['estado'].initial = False
-    form.fields['estado'].widget = forms.HiddenInput()
+    form.fields['latitude'].initial = latitude
+    form.fields['longitude'].initial = longitude
+    form.fields['status'].initial = False
+    form.fields['status'].widget = forms.HiddenInput()
 
     context['form'] = form
-    return render(request, 'crear_red.html', {
+    return render(request, 'create_network.html', {
         'form': form,
     })
 
 
-def crear_ancla(request, latitud, longitud):
+def create_anchor(request, latitude, longitude):
     context = {}
 
-    form = AnclaForm(request.POST or None)
+    form = AnchorForm(request.POST or None)
     if form.is_valid():
         form.save()
 
-    form.fields['latitud'].initial = latitud
-    form.fields['longitud'].initial = longitud
-    form.fields['estado'].initial = False
-    form.fields['estado'].widget = forms.HiddenInput()
+    form.fields['latitude'].initial = latitude
+    form.fields['longitude'].initial = longitude
+    form.fields['status'].initial = False
+    form.fields['status'].widget = forms.HiddenInput()
 
     context['form'] = form
-    return render(request, 'crear_ancla.html', {
+    return render(request, 'create_anchor.html', {
         'form': form,
     })
 
 
-def grupo(request, id_grupo):
-    return HttpResponse("You're looking at grupo %s." % id_grupo)
+def group(request, group_id):
+    return HttpResponse("You're looking at group %s." % group_id)
 
 
-def crear_grupo(request):
-    return render(request, 'crear_grupo.html')
+def create_group(request):
+    return render(request, 'create_group.html')
 
 
-def configuracion(request):
-    return HttpResponse("You're looking at configuracion")
+def configuration(request):
+    return HttpResponse("You're looking at configuration")

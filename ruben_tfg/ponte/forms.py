@@ -1,44 +1,44 @@
 from django import forms
-from .models import Red, Ancla
+from .models import Network, Anchor
 
 
-class AnclaForm(forms.ModelForm):
-
-    class Meta:
-        model = Ancla
-        fields = ('nombre', 'descripcion',
-                  'ip_publica', 'latitud', 'longitud', 'estado')
-
-    def __init__(self, *args, **kwargs):
-        super(AnclaForm, self).__init__(*args, **kwargs)
-        self.fields['nombre'].widget.attrs.update({'class': 'form-control'})
-        self.fields['descripcion'].widget.attrs.update(
-            {'class': 'form-control'})
-        self.fields['ip_publica'].widget.attrs.update(
-            {'class': 'form-control'})
-        self.fields['latitud'].widget.attrs.update({'class': 'form-control'})
-        self.fields['longitud'].widget.attrs.update({'class': 'form-control'})
-        self.fields['estado'].widget.attrs.update({'class': 'form-control'})
-
-
-class RedForm(forms.ModelForm):
+class AnchorForm(forms.ModelForm):
 
     class Meta:
-        model = Red
-        fields = ('nombre', 'descripcion', 'tipo', 'ip', 'mascara', 'estado',
-                  'puerta_enlace', 'latitud', 'longitud', 'dispositivos')
+        model = Anchor
+        fields = ('name', 'description',
+                  'public_ip', 'latitude', 'longitude', 'status')
 
     def __init__(self, *args, **kwargs):
-        super(RedForm, self).__init__(*args, **kwargs)
-        self.fields['nombre'].widget.attrs.update({'class': 'form-control'})
-        self.fields['descripcion'].widget.attrs.update(
+        super(AnchorForm, self).__init__(*args, **kwargs)
+        self.fields['name'].widget.attrs.update({'class': 'form-control'})
+        self.fields['description'].widget.attrs.update(
             {'class': 'form-control'})
-        self.fields['tipo'].widget.attrs.update({'class': 'form-control'})
+        self.fields['public_ip'].widget.attrs.update(
+            {'class': 'form-control'})
+        self.fields['latitude'].widget.attrs.update({'class': 'form-control'})
+        self.fields['longitude'].widget.attrs.update({'class': 'form-control'})
+        self.fields['status'].widget.attrs.update({'class': 'form-control'})
+
+
+class NetworkForm(forms.ModelForm):
+
+    class Meta:
+        model = Network
+        fields = ('name', 'description', 'type', 'ip', 'subnet_mask', 'status',
+                  'gateway', 'latitude', 'longitude', 'devices')
+
+    def __init__(self, *args, **kwargs):
+        super(NetworkForm, self).__init__(*args, **kwargs)
+        self.fields['name'].widget.attrs.update({'class': 'form-control'})
+        self.fields['description'].widget.attrs.update(
+            {'class': 'form-control'})
+        self.fields['type'].widget.attrs.update({'class': 'form-control'})
         self.fields['ip'].widget.attrs.update({'class': 'form-control'})
-        self.fields['mascara'].widget.attrs.update({'class': 'form-control'})
-        self.fields['puerta_enlace'].widget.attrs.update(
+        self.fields['subnet_mask'].widget.attrs.update({'class': 'form-control'})
+        self.fields['gateway'].widget.attrs.update(
             {'class': 'form-control'})
-        self.fields['latitud'].widget.attrs.update({'class': 'form-control'})
-        self.fields['longitud'].widget.attrs.update({'class': 'form-control'})
-        self.fields['dispositivos'].widget.attrs.update(
+        self.fields['latitude'].widget.attrs.update({'class': 'form-control'})
+        self.fields['longitude'].widget.attrs.update({'class': 'form-control'})
+        self.fields['devices'].widget.attrs.update(
             {'class': 'form-control'})

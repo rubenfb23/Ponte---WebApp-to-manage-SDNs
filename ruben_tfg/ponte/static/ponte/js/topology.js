@@ -1,4 +1,4 @@
-function createTopology(dispositivos) {
+function createTopology(devices) {
     
     // Your d3 network chart code goes here
     // Example code for creating a network chart using d3.js
@@ -17,10 +17,10 @@ function createTopology(dispositivos) {
     var links = [];
     
     // Define the data for the network
-    for (var i = 0; i < dispositivos.length; i++) {
-        var nombre = dispositivos[i].nombre;
+    for (var i = 0; i < devices.length; i++) {
+        var name = devices[i].name;
         var id = i;
-        nodes.push({ name: nombre, id: id });
+        nodes.push({ name: name, id: id });
     }
 
     for (var j = 0; j < nodes.length - 1; j++) {
@@ -105,6 +105,8 @@ function createTopology(dispositivos) {
                     return "developer_board";
                 case "Router":
                     return "router";
+                case "Switch":
+                    return "device_hub";
                 default:
                     return "device_unknown";
             }

@@ -1,75 +1,75 @@
 from django.db import models
 
-TIPO_CHOICES = [
-    ('Educativa', 'Educativa'),
+TYPE_CHOICES = [
+    ('Educational', 'Educational'),
     ('Personal', 'Personal'),
-    ('Empresarial', 'Empresarial'),
+    ('Business', 'Business'),
 ]
 
 
-class Servicio(models.Model):
-    id_servicio = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=20)
-    descripcion = models.CharField(max_length=20)
-    estado = models.BooleanField(blank=True)
-    puerto = models.CharField(max_length=20)
+class Service(models.Model):
+    service_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=20)
+    description = models.CharField(max_length=20)
+    status = models.BooleanField(blank=True)
+    port = models.CharField(max_length=20)
 
     def __str__(self):
-        return self.nombre
+        return self.name
 
 
-class Dispositivo(models.Model):
-    id_dispositivo = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=20)
-    descripcion = models.CharField(max_length=20)
-    estado = models.BooleanField(blank=True)
-    sistema_operativo = models.CharField(max_length=20)
-    servicios = models.ManyToManyField(Servicio, blank=True)
-    ip_privada = models.CharField(max_length=20)
-    mac = models.CharField(max_length=20)
+class Device(models.Model):
+    device_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=20)
+    description = models.CharField(max_length=20)
+    status = models.BooleanField(blank=True)
+    operating_system = models.CharField(max_length=20)
+    services = models.ManyToManyField(Service, blank=True)
+    private_ip = models.CharField(max_length=20)
+    mac_address = models.CharField(max_length=20)
 
     def __str__(self):
-        return self.nombre
+        return self.name
 
 
-class Red(models.Model):
-    id_red = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=20)
-    descripcion = models.CharField(max_length=20)
-    tipo = models.CharField(max_length=20, choices=TIPO_CHOICES)
-    estado = models.BooleanField()
+class Network(models.Model):
+    network_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=20)
+    description = models.CharField(max_length=20)
+    type = models.CharField(max_length=20, choices=TYPE_CHOICES)
+    status = models.BooleanField()
     ip = models.CharField(max_length=20)
-    mascara = models.CharField(max_length=20)
-    puerta_enlace = models.CharField(max_length=20)
-    latitud = models.CharField(max_length=20)
-    longitud = models.CharField(max_length=20)
-    dispositivos = models.ManyToManyField(Dispositivo)
+    subnet_mask = models.CharField(max_length=20)
+    gateway = models.CharField(max_length=20)
+    latitude = models.CharField(max_length=20)
+    longitude = models.CharField(max_length=20)
+    devices = models.ManyToManyField(Device)
 
     def __str__(self):
-        return self.nombre
+        return self.name
 
 
-class Ancla(models.Model):
-    id_ancla = models.AutoField(primary_key=True)
-    ip_publica = models.CharField(max_length=20)
-    nombre = models.CharField(max_length=20)
-    descripcion = models.CharField(max_length=20)
-    tipo = models.CharField(max_length=20, choices=TIPO_CHOICES)
-    estado = models.BooleanField()
-    latitud = models.CharField(max_length=20)
-    longitud = models.CharField(max_length=20)
-
-    def __str__(self):
-        return self.nombre
-
-
-class Grupo(models.Model):
-    id_grupo = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=20)
-    descripcion = models.CharField(max_length=20)
-    tipo = models.CharField(max_length=20, choices=TIPO_CHOICES)
-    estado = models.BooleanField(blank=True)
-    redes = models.ManyToManyField(Red)
+class Anchor(models.Model):
+    anchor_id = models.AutoField(primary_key=True)
+    public_ip = models.CharField(max_length=20)
+    name = models.CharField(max_length=20)
+    description = models.CharField(max_length=20)
+    type = models.CharField(max_length=20, choices=TYPE_CHOICES)
+    status = models.BooleanField()
+    latitude = models.CharField(max_length=20)
+    longitude = models.CharField(max_length=20)
 
     def __str__(self):
-        return self.nombre
+        return self.name
+
+
+class Group(models.Model):
+    group_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=20)
+    description = models.CharField(max_length=20)
+    type = models.CharField(max_length=20, choices=TYPE_CHOICES)
+    state = models.BooleanField(blank=True)
+    networks = models.ManyToManyField(Network)
+
+    def __str__(self):
+        return self.name
