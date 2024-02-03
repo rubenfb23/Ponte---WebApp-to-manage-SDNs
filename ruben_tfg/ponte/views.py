@@ -1,8 +1,7 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, request
-from django.forms import forms
-from .models import Red, Grupo, Dispositivo, Servicio, Ancla
+from .models import Red, Ancla
 from .forms import RedForm, AnclaForm
+from django.http import HttpResponse
 
 
 def index(request):
