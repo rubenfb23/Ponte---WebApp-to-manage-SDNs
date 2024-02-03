@@ -210,6 +210,32 @@ function createTopology(dispositivos) {
         }
     }
 
+    var restartButton = svg.append("g")
+        .attr("class", "restart-button")
+        .attr("transform", "translate(" + 5 + ", " + (svg_height - 45) + ")")
+        .on("click", restartPositions);
+
+    restartButton.append("rect")
+        .attr("width", 50)
+        .attr("height", 40)
+        .attr("rx", 15)
+        .attr("ry", 15)
+        .attr("fill", "beige");
+
+    restartButton.append("text")
+        .attr("x", -35)
+        .attr("y", 32)
+        .attr("class", "material-icons")
+        .text("restart");
+
+    function restartPositions() {
+        // Reset the positions of the nodes
+        nodes.forEach(function(d) {
+            d.fx = Math.random()*200;
+            d.fy = Math.random()*1000;
+        });
+    }
+
     // Function to open modal window
     function openModal(d) {
         // Check if a modal is already open
