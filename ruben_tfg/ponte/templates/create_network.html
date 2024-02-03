@@ -14,15 +14,12 @@
         <form class='form' method="POST" enctype="multipart/form-data">
             {% csrf_token %}
              {{ form.as_p }}
-             {%if form.errors%}
-                <p class='error'>Please correct the errors below</p>
-            {%endif%}
-            {% if form.success %}
-                <p class='success'>Network created successfully</p>
-            {% endif %}
             <br/>
             <input class="submit" type="submit" value="Create">
         </form>
+        {% if request.method == 'POST' and form.is_valid %}
+        <p class='success' style='font-size: 20px; color: green;'>Post is OK</p>
+    {% endif %}
     </div>
 </body>
 </html>

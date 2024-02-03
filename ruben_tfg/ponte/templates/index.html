@@ -76,7 +76,7 @@
 
         map = createMap();
         
-        customIconAncla = L.icon({
+        customIconAnchor = L.icon({
             iconUrl: '{% static 'ponte/images/anchor.png' %}',
             iconSize: [35, 35],
             iconAnchor: [15, 15],
@@ -84,7 +84,7 @@
             
         });
 
-        customIconRed = L.icon({
+        customIconNetwork = L.icon({
             iconUrl: '{% static 'ponte/images/network.png' %}',
             iconSize: [35, 35],
             iconAnchor: [15, 15],
@@ -93,12 +93,12 @@
 
 
         {%for n in networks %}
-        var marker = L.marker([{{n.latitud}}, {{n.longitude}}], {icon: customIconRed});
+        var marker = L.marker([{{n.latitude}}, {{n.longitude}}], {icon: customIconNetwork});
         marker.addTo(markers); // Add the marker to the marker cluster group instead of the map
         marker.on('click', function() {
             const popupContent = "<b>Network Information</b><br/>" +
                  "Name: {{ n.name }}<br/>" +
-                {% if r.estado %}
+                {% if n.state %}
                     "Status: Online<br/>"
                 {% else %}
                     "Status: Offline<br/>"
@@ -109,7 +109,7 @@
         });
         {% endfor %}
         {%for a in anchors %}
-        var marker = L.marker([{{a.latitude}}, {{a.longitude}}], {icon: customIconAncla});
+        var marker = L.marker([{{a.latitude}}, {{a.longitude}}], {icon: customIconAnchor});
         marker.addTo(markers); // Add the marker to the marker cluster group instead of the map
         marker.on('click', function() {
             const popupContent = "<b>Anchor Information</b><br/>" +
