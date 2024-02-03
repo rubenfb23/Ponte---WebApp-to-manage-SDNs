@@ -11,6 +11,9 @@
      <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
      crossorigin=""></script>
+     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+     <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
      <script src="{% static 'ponte/js/map.js' %}"></script>
 </head>
 <body>
@@ -65,15 +68,24 @@
     <script>
         map = createMap();
         
-        customIcon = L.icon({
+        customIconAncla = L.icon({
             iconUrl: '{% static 'ponte/images/anchor.png' %}',
-            iconSize: [30, 30],
+            iconSize: [35, 35],
             iconAnchor: [15, 15],
             popupAnchor: [0, -15]
         });
 
+        customIconRed = L.icon({
+            iconUrl: '{% static 'ponte/images/network.png' %}',
+            iconSize: [35, 35],
+            iconAnchor: [15, 15],
+            popupAnchor: [0, -15]
+        });
+
+        var markers = L.markerClusterGroup();
+
         {%for r in redes %}
-        var marker = L.marker([{{r.latitud}}, {{r.longitud}}]);
+        var marker = L.marker([{{r.latitud}}, {{r.longitud}}], {icon: customIconRed});
         marker.addTo(map);
         marker.on('click', function() {
             const popupContent = "<b>Network Information</b><br/>" +
@@ -87,9 +99,11 @@
             const markerPopup = L.popup().setContent(popupContent);
             this.bindPopup(markerPopup).openPopup();
         });
+        markers.addLayer(marker);
         {% endfor %}
+        map.addLayer(markers);
         {%for a in anclas %}
-        var marker = L.marker([{{a.latitud}}, {{a.longitud}}], {icon: customIcon});
+        var marker = L.marker([{{a.latitud}}, {{a.longitud}}], {icon: customIconAncla});
         marker.addTo(map);
         marker.on('click', function() {
             const popupContent = "<b>Anchor Information</b><br/>" +
@@ -103,7 +117,11 @@
             const markerPopup = L.popup().setContent(popupContent);
             this.bindPopup(markerPopup).openPopup();
         });
+        markers.addLayer(marker);
         {% endfor %}
+
+        map.addLayer(markers);
+        
     </script>
 
     </div>

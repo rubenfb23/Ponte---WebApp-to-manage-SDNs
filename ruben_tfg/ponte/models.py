@@ -11,7 +11,6 @@ class Servicio(models.Model):
     id_servicio = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=20)
     descripcion = models.CharField(max_length=20)
-    tipo = models.CharField(max_length=20)
     estado = models.BooleanField(blank=True)
     puerto = models.CharField(max_length=20)
 
@@ -38,7 +37,7 @@ class Red(models.Model):
     nombre = models.CharField(max_length=20)
     descripcion = models.CharField(max_length=20)
     tipo = models.CharField(max_length=20, choices=TIPO_CHOICES)
-    estado = models.BooleanField(blank=True)
+    estado = models.BooleanField()
     ip = models.CharField(max_length=20)
     mascara = models.CharField(max_length=20)
     puerta_enlace = models.CharField(max_length=20)
@@ -55,8 +54,8 @@ class Ancla(models.Model):
     ip_publica = models.CharField(max_length=20)
     nombre = models.CharField(max_length=20)
     descripcion = models.CharField(max_length=20)
-    tipo = models.CharField(max_length=20)
-    estado = models.BooleanField(blank=True)
+    tipo = models.CharField(max_length=20, choices=TIPO_CHOICES)
+    estado = models.BooleanField()
     latitud = models.CharField(max_length=20)
     longitud = models.CharField(max_length=20)
 
@@ -68,7 +67,7 @@ class Grupo(models.Model):
     id_grupo = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=20)
     descripcion = models.CharField(max_length=20)
-    tipo = models.CharField(max_length=20)
+    tipo = models.CharField(max_length=20, choices=TIPO_CHOICES)
     estado = models.BooleanField(blank=True)
     redes = models.ManyToManyField(Red)
 
