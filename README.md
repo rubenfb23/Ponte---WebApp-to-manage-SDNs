@@ -61,5 +61,6 @@ This project develops an advanced web application aimed at simplifying and optim
 
 ## License
 
-(TODO: Specify the license under which the project is released.)
+This project is licensed under the GNU Affero General Public License v3.0 (AGPL-3.0).
+
 
