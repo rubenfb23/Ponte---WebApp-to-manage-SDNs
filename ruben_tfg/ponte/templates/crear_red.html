@@ -14,9 +14,6 @@
         <form class='form' method="POST" enctype="multipart/form-data">
             {% csrf_token %}
              {{ form.as_p }}
-             {% if form.errors %}
-                <p>Algunos campos no son validos!</p>
-             {% endif %}
             <br/>
             <input class="submit" type="submit" value="Create">
         </form>
