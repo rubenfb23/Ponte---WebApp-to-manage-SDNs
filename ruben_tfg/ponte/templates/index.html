@@ -81,6 +81,22 @@
             this.bindPopup(markerPopup).openPopup();
         });
         {% endfor %}
+        {%for a in anclas %}
+        var marker = L.marker([{{a.latitud}}, {{a.longitud}}]);
+        marker.addTo(map);
+        marker.on('click', function() {
+            const popupContent = "<b>Anchor Information</b><br/>" +
+                 "Name: {{ a.nombre }}<br/>" +
+                {% if a.estado %}
+                    "Status: Online<br/>"
+                {% else %}
+                    "Status: Offline<br/>"
+                {% endif %}+
+                "<a href='/ponte/ancla/{{ a.id_ancla }}' class='buttonpop'><button>View Details</button></a>";
+            const markerPopup = L.popup().setContent(popupContent);
+            this.bindPopup(markerPopup).openPopup();
+        });
+        {% endfor %}
     </script>
 
     </div>
