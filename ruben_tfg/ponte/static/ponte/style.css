@@ -32,6 +32,10 @@ a, a:hover, a:vissited, a:active {
     display: flex;
 }
 
+.material-icons {
+    cursor: pointer;
+}
+
 #map{
     height: 100%;
     width: 100%;
