@@ -12,7 +12,7 @@ class Servicio(models.Model):
     nombre = models.CharField(max_length=20)
     descripcion = models.CharField(max_length=20)
     tipo = models.CharField(max_length=20)
-    estado = models.CharField(max_length=20)
+    estado = models.BooleanField()
     puerto = models.CharField(max_length=20)
 
     def __str__(self):
@@ -22,12 +22,10 @@ class Servicio(models.Model):
 class Dispositivo(models.Model):
     id_dispositivo = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=20)
-    localizacion = models.CharField(max_length=20)
     descripcion = models.CharField(max_length=20)
-    tipo = models.CharField(max_length=20)
-    estado = models.CharField(max_length=20)
+    estado = models.BooleanField()
     sistema_operativo = models.CharField(max_length=20)
-    servicios = models.ManyToManyField(Servicio)
+    servicios = models.ManyToManyField(Servicio, blank=True)
     ip_privada = models.CharField(max_length=20)
     mac = models.CharField(max_length=20)
 
@@ -58,19 +56,20 @@ class Ancla(models.Model):
     nombre = models.CharField(max_length=20)
     descripcion = models.CharField(max_length=20)
     tipo = models.CharField(max_length=20)
-    estado = models.CharField(max_length=20)
+    estado = models.BooleanField()
     latitud = models.CharField(max_length=20)
     longitud = models.CharField(max_length=20)
 
     def __str__(self):
         return self.nombre
 
+
 class Grupo(models.Model):
     id_grupo = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=20)
     descripcion = models.CharField(max_length=20)
     tipo = models.CharField(max_length=20)
-    estado = models.CharField(max_length=20)
+    estado = models.BooleanField()
     redes = models.ManyToManyField(Red)
 
     def __str__(self):

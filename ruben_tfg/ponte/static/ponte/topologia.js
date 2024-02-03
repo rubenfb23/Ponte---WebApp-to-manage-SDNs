@@ -27,8 +27,6 @@ function createTopology(dispositivos) {
         links.push({ source: j, target: j+1});
     }
     
-    console.log(nodes);
-    console.log(links);
     // Create the force simulation
     var simulation = d3.forceSimulation(nodes)
         .force("link", d3.forceLink(links).id(function(d) { return d.id; }))
@@ -72,7 +70,6 @@ function createTopology(dispositivos) {
                 .attr("font-size", 20)
         })
         .on("click", function(d) {
-            console.log("Node clicked:", d);
             // Open modal window here
             openModal(d);
         })
@@ -91,7 +88,6 @@ function createTopology(dispositivos) {
         .attr("fill", "lightblue") 
         .attr("stroke", "blue")
         .on("click", function(d) {
-            console.log("Node clicked:", d);
             // Open modal window here
             openModal(d);
         })
@@ -114,7 +110,6 @@ function createTopology(dispositivos) {
             }
         })
         .on("click", function(d) {
-            console.log("Node clicked:", d);
             // Open modal window here
             openModal(d);
         })
